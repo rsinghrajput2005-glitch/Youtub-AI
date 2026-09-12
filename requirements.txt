@@ -1,0 +1,42 @@
+# --- YouTube audio download ---
+yt-dlp
+pydub
+
+# --- Transcription (Whisper) ---
+openai-whisper
+ffmpeg-python
+
+# --- Translation (Hindi <-> English) ---
+deep-translator
+
+# --- LangChain + LCEL + Mistral API ---
+langchain
+langchain-core
+langchain-community
+langchain-mistralai
+
+# --- RAG pipeline ---
+chromadb
+sentence-transformers
+langchain-huggingface
+
+# --- Embeddings / HF backend ---
+huggingface-hub
+transformers
+langchain-huggingface
+
+# --- UI ---
+streamlit
+
+# --- PDF export ---
+fpdf2
+reportlab
+
+# --- Utilities ---
+python-dotenv
+tiktoken
+numpy
+pandas
+
+youtube_transcript_api
+deep_translator
