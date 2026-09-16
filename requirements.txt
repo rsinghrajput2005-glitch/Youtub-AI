@@ -18,6 +18,7 @@ langchain-core
 langchain-community
 langchain-mistralai
 langchain-huggingface
+langchain-chroma
 
 # RAG
 chromadb
