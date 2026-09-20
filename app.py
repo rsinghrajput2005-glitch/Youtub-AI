@@ -1,13 +1,16 @@
+import logging
+
 import streamlit as st
 from dotenv import load_dotenv
 
-from core.transcribe import get_transcript
+from core.transcribe import TranscriptError, get_transcript
 from core.summarize import summary as summarize
 from core.extractor import extract_action_items, extract_questions
 from core.vector_store import build_vector_store
 from core.rag_engine import load_rag_chain, ask_question
 
 load_dotenv()
+logger = logging.getLogger(__name__)
 
 st.set_page_config(
     page_title="AI YouTube Video Assistant",
@@ -107,8 +110,14 @@ if process_clicked:
         try:
             st.session_state.pipeline_result = run_pipeline_streamlit(video_link.strip())
             st.session_state.current_video = video_link.strip()
-        except Exception as error:
-            st.sidebar.error(f"Pipeline failed: {error}")
+        except (ValueError, TranscriptError) as error:
+            st.sidebar.error(str(error))
+            st.session_state.pipeline_result = None
+        except Exception:
+            logger.exception("Unexpected Streamlit pipeline failure")
+            st.sidebar.error(
+                "We couldn't process this video right now. Please try again later."
+            )
             st.session_state.pipeline_result = None
 
 # ---------------------------------------------------------------------------
